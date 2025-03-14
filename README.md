@@ -22,12 +22,15 @@ This is a **Blog Application** built using **Spring Boot** for the backend and *
 
 ### 1. Clone the Repository
 
-git clone https://github.com/yourusername/blog-app.git
+git clone https://github.com/git075/blog-app.git
 cd blog-app
+
 2. Configure MySQL Database
+
 Create a MySQL database named blogdb:
 CREATE DATABASE blogdb;
 Update the application.properties file with your MySQL credentials:
+
 spring.application.name=BlogApp
 spring.datasource.url=jdbc:mysql://localhost:3306/blogdb
 spring.datasource.username=usernam
@@ -36,11 +39,10 @@ spring.jpa.hibernate.ddl-auto=update
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 server.port=8080
-
 huggingface.api.url=${HuggingFaceApiUrl}
 huggingface.api.key=${HuggingFaceApiKey}
-
 openai.api.key=${OpenApiKey}
+
 3. Run the Application
 Build the application:
 mvn clean install
