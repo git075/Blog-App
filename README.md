@@ -33,8 +33,8 @@ Update the application.properties file with your MySQL credentials:
 
 spring.application.name=BlogApp
 spring.datasource.url=jdbc:mysql://localhost:3306/blogdb
-spring.datasource.username=usernam
-spring.datasource.password=pass
+spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
+spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
 spring.jpa.hibernate.ddl-auto=update
 spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
@@ -74,16 +74,30 @@ Run the container:
 docker run -d -p 8080:8080 --name blog-container blog-app
 The application will now be accessible at http://your-ec2-public-ip:8080.
 
-API Endpoints
-1. User Registration & Login
-POST /api/auth/register - Register a new user.
-POST /api/auth/login - Log in with credentials to receive a JWT token.
-2. Blog Post Management
-GET /api/posts - Get all blog posts.
-GET /api/posts/{id} - Get a specific blog post by ID.
-POST /api/posts - Create a new blog post.
-PUT /api/posts/{id} - Update an existing blog post by ID.
-DELETE /api/posts/{id} - Delete a blog post by ID.
+## API Endpoints
+
+### 1. Blog Post Management
+
+- **POST** `/api/blogs`  
+  Create a new blog post. The request body should contain the blog's title and content. Upon successful creation, the blog post will be returned with a `201 Created` status.
+
+- **GET** `/api/blogs`  
+  Retrieve a list of all blog posts with pagination support. You can provide the `page` and `size` query parameters to control the number of results per page and which page of results to return.
+
+- **GET** `/api/blogs/{id}`  
+  Retrieve a specific blog post by its ID. If the blog post with the provided ID exists, it will be returned with a `200 OK` status. If not, a `204 No Content` status will be returned.
+
+- **PUT** `/api/blogs/{id}`  
+  Update an existing blog post by its ID. The request body should contain the updated title and content of the blog. If the blog post is successfully updated, the updated blog post is returned with a `200 OK` status.
+
+- **DELETE** `/api/blogs/{id}`  
+  Delete a blog post by its ID. A `204 No Content` status is returned upon successful deletion.
+
+### 2. Blog Post Summary Generation
+
+- **GET** `/api/blogs/{id}/summary`  
+  Generate a summary of the blog post with the specified ID. The blog content will be processed by an AI service to generate a summary. If the blog content is empty or invalid, a `400 Bad Request` status will be returned. If there is an issue with the AI service, an error message with a `500 Internal Server Error` or a `429 Too Many Requests` status may be returned.
+
 
 Environment Variables
 SPRING_DATASOURCE_URL: MySQL database URL.
