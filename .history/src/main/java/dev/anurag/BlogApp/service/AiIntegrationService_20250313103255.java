@@ -17,10 +17,10 @@ public class AiIntegrationService {
         String prompt = "Summarize the following blog content in 3-4 sentences:\n" + blogContent;
 
         CompletionRequest request = CompletionRequest.builder()
-                .model("gpt-3.5-turbo")  
+                .model("gpt-3.5-turbo")  // Model for better performance
                 .prompt(prompt)
-                .maxTokens(150)          
-                .temperature(0.7)        
+                .maxTokens(150)          // Limit the output length
+                .temperature(0.7)        // Balanced creativity
                 .build();
 
         CompletionResult result = openAiService.createCompletion(request);

@@ -20,7 +20,7 @@ public class AiIntegrationService {
                 .model("gpt-3.5-turbo")  
                 .prompt(prompt)
                 .maxTokens(150)          
-                .temperature(0.7)        
+                .temperature(0.7)        // Balanced creativity
                 .build();
 
         CompletionResult result = openAiService.createCompletion(request);

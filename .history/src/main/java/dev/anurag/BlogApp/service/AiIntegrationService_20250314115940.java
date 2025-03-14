@@ -19,8 +19,8 @@ public class AiIntegrationService {
         CompletionRequest request = CompletionRequest.builder()
                 .model("gpt-3.5-turbo")  
                 .prompt(prompt)
-                .maxTokens(150)          
-                .temperature(0.7)        
+                .maxTokens(150)          // Limit the output length
+                .temperature(0.7)        // Balanced creativity
                 .build();
 
         CompletionResult result = openAiService.createCompletion(request);
